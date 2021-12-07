@@ -6,7 +6,6 @@ class CreateShoppingTrip < ActiveRecord::Migration[6.1]
       t.string :measurements
       t.integer :amount
       t.integer :user_id
+    end
   end
 end
-
-# each instance is a shopping trip, like thanksgiving dinner. Each

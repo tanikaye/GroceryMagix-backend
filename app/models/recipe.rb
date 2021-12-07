@@ -1,5 +1,4 @@
 class Recipe < ActiveRecord::Base
-has_many: groceries
-belongs_to: users
-has_many: shopping_trips, through: :groceries
+    belongs_to :user
+    belongs_to :shopping_trip
 end
