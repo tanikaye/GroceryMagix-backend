@@ -6,6 +6,7 @@ class CreateRecipes < ActiveRecord::Migration[6.1]
       t.integer :servings
       t.string :ingredients
       t.integer :user_id
+      t.integer :shopping_trip_id
     end
   end
 end
