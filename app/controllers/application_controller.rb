@@ -1,6 +1,3 @@
-require 'pry'
-
-
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
 
@@ -10,15 +7,41 @@ class ApplicationController < Sinatra::Base
   #   recipes.to_json
   # end
 
-  get '/' do
-    "Hello World"
+  get "/users" do
+    users = User.all
+    users.to_json
   end
 
   post '/recipes' do
     recipe = Recipe.create(
-      name: params[:name],
+      {name:params[:name]},
     )
     recipe.to_json
+  end
+
+  post '/users' do
+    new_user = User.create(
+      name: params[:name]
+  )
+    new_user.to_json
+  end
+
+  get "/users/:id" do
+    user=User.find(params[:id])
+    user.to_json(include: { shopping_trips: { include: :recipe } })
+  end
+
+  post "/users/:id" do
+    user=User.find(params[:id])
+    newRecipe=Recipe.create(
+      title: params[:title],
+      url: params[:url],
+      servings: params[:servings],
+      ingredients: params[:ingredients],
+      user_id: params[:user_id],
+      shopping_trip_id: params[:shopping_trip_id]
+  )
+      newRecipe.to_json
   end
 
 end
